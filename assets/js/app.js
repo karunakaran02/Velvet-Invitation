@@ -23,8 +23,6 @@
 
   const introVideo = $("#introVideo");
   const bgAudio = $("#bgAudio");
-  const musicToggleBtn = $("#musicToggleBtn");
-  const musicTapPrompt = $("#musicTapPrompt");
   const openSealBtn = $("#openSealBtn");
   const scrollContainer = $("#invitationScroll");
   const toastEl = $("#appToast");
@@ -47,14 +45,6 @@
       sourceEl.src = config.media.music;
     }
     bgAudio.load();
-  }
-
-  function showAudioPrompt() {
-    // Zero-tap mode
-  }
-
-  function hideAudioPrompt() {
-    // Zero-tap mode
   }
 
   function playAudio() {
@@ -227,17 +217,6 @@
   // 2. AUDIO PLAYBACK & EQUALIZER
   // ==========================================
   function updateMusicButton() {
-    if (musicToggleBtn) {
-      if (isMusicPlaying) {
-        musicToggleBtn.classList.add("is-playing");
-        musicToggleBtn.classList.remove("needs-tap");
-        musicToggleBtn.setAttribute("aria-label", "Pause music");
-      } else {
-        musicToggleBtn.classList.remove("is-playing");
-        musicToggleBtn.setAttribute("aria-label", "Play music");
-      }
-    }
-
     const sealLabel = openSealBtn?.querySelector(".royal-seal-label");
     if (sealLabel) {
       if (isMusicPlaying) {
@@ -249,22 +228,6 @@
       }
     }
   }
-
-  musicToggleBtn?.addEventListener("click", (e) => {
-    e.stopPropagation();
-    if (!bgAudio) return;
-
-    if (bgAudio.paused || bgAudio.muted) {
-      userDismissedMusic = false;
-      bgAudio.muted = false;
-      playAudio();
-    } else {
-      bgAudio.pause();
-      userDismissedMusic = true;
-      isMusicPlaying = false;
-      updateMusicButton();
-    }
-  });
 
   bgAudio?.addEventListener("play", () => {
     isMusicPlaying = !bgAudio.muted;
@@ -360,17 +323,6 @@
     if (e.key === "Escape") closeLightbox();
   });
 
-  // Attach lightbox to page 1 card and page 2 portrait
-  $("#page1CardImg")?.addEventListener("click", () => {
-    openLightbox(config.media.page1CardImage);
-  });
-  $("#page2CoupleImg")?.addEventListener("click", () => {
-    openLightbox(config.media.page2CoupleImage);
-  });
-  $("#zoomCardBtn")?.addEventListener("click", () => {
-    openLightbox(config.media.page1CardImage);
-  });
-
   // ==========================================
   // 6. QR CODE GENERATION (Section 3 & Desktop)
   // ==========================================
@@ -420,39 +372,6 @@
     } else {
       showToast(fullAddress);
     }
-  });
-
-  // Download QR Code button
-  $("#downloadQrBtn")?.addEventListener("click", () => {
-    const qrImg = $("#venueQrCode img") || $("#venueQrCode canvas");
-    if (!qrImg) return;
-
-    let dataUrl;
-    if (qrImg.tagName === "CANVAS") {
-      dataUrl = qrImg.toDataURL("image/png");
-    } else {
-      dataUrl = qrImg.src;
-    }
-
-    const a = document.createElement("a");
-    a.href = dataUrl;
-    a.download = "Thayalan-Maryam-Wedding-Venue-QR.png";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    showToast("✓ QR Code பதிவிறக்கம் செய்யப்பட்டது (Downloaded!)");
-  });
-
-  // Calendar .ics download
-  $("#addToCalendarBtn")?.addEventListener("click", () => {
-    const startIso = "20261128T043000Z"; // 10:00 AM IST = 04:30 UTC
-    const endIso = "20261128T100000Z";   // 03:30 PM IST = 10:00 UTC
-    const title = encodeURIComponent(config.wedding.addToCalendarTitle);
-    const desc = encodeURIComponent(config.wedding.addToCalendarDesc);
-    const loc = encodeURIComponent(`${config.venue.nameEnglish}, ${config.venue.addressEnglish}`);
-
-    const googleCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startIso}/${endIso}&details=${desc}&location=${loc}`;
-    window.open(googleCalUrl, "_blank");
   });
 
   // WhatsApp RSVP link
@@ -606,19 +525,10 @@
       const brideEng = brideTamil?.parentElement?.querySelector(".name-sub");
       if (brideEng && bride.nameEnglish) brideEng.textContent = bride.nameEnglish;
     }
-
-    // Sync Top Header Brand
-    const brandSpans = $$(".header-brand span:not(.interfaith-dot)");
-    if (brandSpans.length >= 2) {
-      if (groom?.nameTamil) brandSpans[0].textContent = groom.nameTamil;
-      if (bride?.nameTamil) brandSpans[1].textContent = bride.nameTamil;
-    }
   }
 
-  initCoupleData();
-
   // ==========================================
-  // 11. COUPLE 3-PHOTO SLIDER / GALLERY (AUTOMATIC CAROUSEL)
+  // 11. COUPLE 2-PHOTO SLIDER / GALLERY (AUTOMATIC CAROUSEL)
   // ==========================================
   let coupleSliderInitialized = false;
 
@@ -630,8 +540,7 @@
     coupleSliderInitialized = true;
     const gallery = $("#couplePhotoGallery") || track;
     const slides = $$(".couple-slide", track);
-    const dots = $$(".story-dot, .slider-dot");
-    const thumbs = $$(".thumb-card");
+    const dots = $$(".story-dot");
     const prevBtn = $("#coupleSliderPrev");
     const nextBtn = $("#coupleSliderNext");
     const totalSlides = slides.length || 2;
@@ -646,38 +555,15 @@
       });
     }
 
-    // Helper for automatic extension fallback (.jpeg <-> .jpg)
-    function attachImgFallback(img) {
-      if (!img) return;
-      img.addEventListener("error", function () {
-        if (this.dataset.retried) return;
-        this.dataset.retried = "1";
-        if (this.src.endsWith(".jpg")) {
-          this.src = this.src.replace(/\.jpg$/i, ".jpeg");
-        } else if (this.src.endsWith(".jpeg")) {
-          this.src = this.src.replace(/\.jpeg$/i, ".jpg");
-        }
-      });
-    }
-
     // Sync image sources from config if present
     const photoList = config.media?.couplePhotos;
     if (Array.isArray(photoList) && photoList.length > 0) {
       photoList.forEach((src, idx) => {
         const slideImg = $(`#couplePhoto${idx + 1}`);
-        const thumbImg = $(`#coupleThumb${idx + 1}`);
         if (slideImg && src) {
           slideImg.src = src;
-          attachImgFallback(slideImg);
-        }
-        if (thumbImg && src) {
-          thumbImg.src = src;
-          attachImgFallback(thumbImg);
         }
       });
-    } else {
-      slides.forEach((s) => attachImgFallback(s.querySelector("img")));
-      thumbs.forEach((t) => attachImgFallback(t.querySelector("img")));
     }
 
     function updateSlider(idx) {
@@ -687,7 +573,6 @@
 
       slides.forEach((s, i) => s.classList.toggle("is-active", i === currentSlide));
       dots.forEach((d, i) => d.classList.toggle("is-active", i === currentSlide));
-      thumbs.forEach((t, i) => t.classList.toggle("is-active", i === currentSlide));
     }
 
     // Auto-scroll / Gallery Carousel Autoplay
@@ -742,16 +627,6 @@
       dot.addEventListener("click", (e) => {
         e.stopPropagation();
         const targetIdx = parseInt(dot.getAttribute("data-index") || "0", 10);
-        updateSlider(targetIdx);
-        restartAutoScroll();
-      });
-    });
-
-    // Thumbnails (if present)
-    thumbs.forEach((thumb) => {
-      thumb.addEventListener("click", (e) => {
-        e.stopPropagation();
-        const targetIdx = parseInt(thumb.getAttribute("data-index") || "0", 10);
         updateSlider(targetIdx);
         restartAutoScroll();
       });
@@ -841,8 +716,6 @@
       }
     });
   }
-
-  initCoupleSlider();
 
   // ==========================================
   // 12. DESKTOP VIEW CONTROLS
