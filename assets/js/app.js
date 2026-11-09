@@ -1,8 +1,3 @@
-/**
- * WEDSMINT VELVET DIGITAL WEDDING INVITATION
- * Interactive Engine: Video, Audio, QR, Countdown, and Action Handlers
- */
-
 (function () {
   "use strict";
 
@@ -12,12 +7,10 @@
     return;
   }
 
-  // --- State ---
   let isMusicPlaying = false;
   let hasOpened = false;
   let userDismissedMusic = false;
 
-  // --- DOM Elements ---
   const $ = (selector, context = document) => context.querySelector(selector);
   const $$ = (selector, context = document) => [...context.querySelectorAll(selector)];
 
@@ -31,10 +24,7 @@
   const lightboxImg = $("#lightboxImg");
   const lightboxClose = $("#lightboxClose");
 
-  // ==========================================
-  // 1. VIDEO & AUDIO INITIALIZATION
-  // ==========================================
-  // Synchronously ensure audio source matches config
+
   if (bgAudio && config.media && config.media.music) {
     if (bgAudio.getAttribute("src") !== config.media.music) {
       bgAudio.src = config.media.music;
@@ -76,9 +66,6 @@
           return true;
         })
         .catch((err) => {
-          // If browser Autoplay Policy requires user interaction first:
-          // Keep isMusicPlaying false and DO NOT remove unlock listeners!
-          // This ensures that the moment the user scrolls, touches, or interacts, audio immediately begins!
           isMusicPlaying = false;
           updateMusicButton();
           return false;
@@ -88,13 +75,10 @@
     return Promise.resolve(false);
   }
 
-  // Play atmospheric video
   if (introVideo) {
     introVideo.play().catch(() => undefined);
   }
 
-  // Universal User Interaction & Scroll Autoplay Unlock
-  // Captures scrolling, wheel, swipe, touch, pointer movement, focus, or keys to ensure instant music on first scroll or tap
   const unlockEvents = [
     "scroll",
     "wheel",
@@ -132,7 +116,6 @@
       });
     });
 
-    // Dedicated scroll handler on container
     if (scrollContainer) {
       scrollContainer.addEventListener("scroll", onUserGesture, { capture: true, passive: true });
     }
@@ -162,7 +145,6 @@
 
   attachUnlockListeners();
 
-  // Royal seal button toggles music
   openSealBtn?.addEventListener("click", (e) => {
     e.stopPropagation();
     if (!bgAudio) return;
@@ -179,17 +161,14 @@
     }
   });
 
-  // Multi-lifecycle Autoplay triggers for initial page load
   function triggerInitialAutoplay() {
     if (config.media?.musicAutoPlay && !userDismissedMusic && bgAudio && (bgAudio.paused || bgAudio.muted)) {
       playAudio();
     }
   }
 
-  // 1. Immediate trigger
   triggerInitialAutoplay();
 
-  // 2. Lifecycle hooks
   ["load", "pageshow", "focus"].forEach((evt) => {
     window.addEventListener(evt, triggerInitialAutoplay);
   });
@@ -198,7 +177,6 @@
   bgAudio?.addEventListener("canplay", triggerInitialAutoplay, { once: true });
   bgAudio?.addEventListener("canplaythrough", triggerInitialAutoplay, { once: true });
 
-  // 3. Staggered retry timers for initial playback
   [100, 300, 700, 1500].forEach((delay) => {
     setTimeout(() => {
       if (!isMusicPlaying && !userDismissedMusic && bgAudio && bgAudio.paused) {
@@ -213,9 +191,7 @@
     }
   });
 
-  // ==========================================
-  // 2. AUDIO PLAYBACK & EQUALIZER
-  // ==========================================
+
   function updateMusicButton() {
     const sealLabel = openSealBtn?.querySelector(".royal-seal-label");
     if (sealLabel) {
@@ -243,9 +219,7 @@
     updateMusicButton();
   });
 
-  // ==========================================
-  // 3. SMOOTH SCROLL NAVIGATION & DRAG-SCROLL
-  // ==========================================
+
   function initScrollNavigation() {
     // Wedsmint .scroll-cue anchor links
     $$(".scroll-cue").forEach((cue) => {
@@ -263,7 +237,6 @@
       });
     });
 
-    // Desktop Drag-to-Scroll (enables natural phone-like drag-scrolling on desktop)
     let isDraggingScroll = false;
     let dragStartY = 0;
     let dragScrollTop = 0;
@@ -289,9 +262,7 @@
     });
   }
 
-  // ==========================================
-  // 4. TOAST NOTIFICATIONS
-  // ==========================================
+
   let toastTimer = null;
   function showToast(message) {
     if (toastTimer) clearTimeout(toastTimer);
@@ -302,9 +273,7 @@
     }, 2800);
   }
 
-  // ==========================================
-  // 5. LIGHTBOX MODAL
-  // ==========================================
+
   function openLightbox(src) {
     lightboxImg.src = src;
     lightboxModal.classList.add("is-open");
@@ -323,11 +292,8 @@
     if (e.key === "Escape") closeLightbox();
   });
 
-  // ==========================================
-  // 6. QR CODE GENERATION (Section 3 & Desktop)
-  // ==========================================
+
   function initQrCodes() {
-    // Venue Location Google Maps QR code on Section 3
     const venueQrContainer = $("#venueQrCode");
     if (venueQrContainer && window.QRCode) {
       venueQrContainer.innerHTML = "";
@@ -341,7 +307,6 @@
       });
     }
 
-    // Desktop "Scan on Phone" floating QR code
     const desktopQrContainer = $("#desktopQrCodeFrame");
     if (desktopQrContainer && window.QRCode) {
       desktopQrContainer.innerHTML = "";
@@ -357,10 +322,7 @@
     }
   }
 
-  // ==========================================
-  // 7. VENUE ACTION BUTTONS
-  // ==========================================
-  // Copy Venue Address button
+
   $("#copyAddressBtn")?.addEventListener("click", () => {
     const fullAddress = `${config.venue.nameTamil} (${config.venue.nameEnglish}), ${config.venue.addressTamil} (${config.venue.addressEnglish})`;
     if (navigator.clipboard) {
@@ -374,7 +336,6 @@
     }
   });
 
-  // WhatsApp RSVP link
   $("#whatsappRsvpBtn")?.addEventListener("click", (e) => {
     e.preventDefault();
     const cleanPhone = config.rsvp.whatsappNumber.replace(/[^0-9]/g, "");
@@ -383,9 +344,7 @@
     window.open(waUrl, "_blank");
   });
 
-  // ==========================================
-  // 8. COUNTDOWN TIMER (Section 4)
-  // ==========================================
+
   function initCountdown() {
     const targetDate = new Date(config.wedding.isoDate).getTime();
 
@@ -421,9 +380,7 @@
     setInterval(update, 1000);
   }
 
-  // ==========================================
-  // 9. GOLDEN PETAL & PARTICLE CANVAS
-  // ==========================================
+
   function initParticles() {
     const appViewport = $("#appViewport");
     const canvas = $("#petalCanvas");
@@ -481,15 +438,12 @@
     requestAnimationFrame(render);
   }
 
-  // ==========================================
-  // 10. COUPLE CONFIG & TYPOGRAPHY
-  // ==========================================
+
   function initCoupleData() {
     if (!config.couple) return;
 
     const { groom, bride, fontStyle, tamilFontStyle } = config.couple;
 
-    // Apply font style variants to couple names container
     const coupleContainer = $(".couple-names");
     if (coupleContainer) {
       coupleContainer.classList.remove(
@@ -508,7 +462,6 @@
       coupleContainer.classList.add(`tamil-style-${tamilFontStyle || "arima"}`);
     }
 
-    // Sync Groom names
     if (groom) {
       const groomTamil = $(".groom-name");
       if (groomTamil && groom.nameTamil) groomTamil.textContent = groom.nameTamil;
@@ -517,7 +470,6 @@
       if (groomEng && groom.nameEnglish) groomEng.textContent = groom.nameEnglish;
     }
 
-    // Sync Bride names
     if (bride) {
       const brideTamil = $(".bride-name");
       if (brideTamil && bride.nameTamil) brideTamil.textContent = bride.nameTamil;
@@ -527,9 +479,7 @@
     }
   }
 
-  // ==========================================
-  // 11. COUPLE 2-PHOTO SLIDER / GALLERY (AUTOMATIC CAROUSEL)
-  // ==========================================
+
   let coupleSliderInitialized = false;
 
   function initCoupleSlider() {
@@ -547,7 +497,6 @@
     let currentSlide = 0;
     let isSwiping = false;
 
-    // Dynamically size track and slides to match slide count
     if (totalSlides > 0) {
       track.style.width = `${totalSlides * 100}%`;
       slides.forEach((s) => {
@@ -555,7 +504,6 @@
       });
     }
 
-    // Sync image sources from config if present
     const photoList = config.media?.couplePhotos;
     if (Array.isArray(photoList) && photoList.length > 0) {
       photoList.forEach((src, idx) => {
@@ -575,7 +523,6 @@
       dots.forEach((d, i) => d.classList.toggle("is-active", i === currentSlide));
     }
 
-    // Auto-scroll / Gallery Carousel Autoplay
     let autoScrollTimer = null;
     const isAutoplayEnabled = config.media?.carouselAutoplay !== false;
     const autoplayInterval = Number(config.media?.carouselInterval) || 3800;
@@ -599,7 +546,6 @@
       startAutoScroll();
     }
 
-    // Click slide to advance to next photo
     slides.forEach((slide) => {
       slide.addEventListener("click", () => {
         if (!isSwiping) {
@@ -609,7 +555,6 @@
       });
     });
 
-    // Arrow navigation
     prevBtn?.addEventListener("click", (e) => {
       e.stopPropagation();
       updateSlider(currentSlide - 1);
@@ -622,7 +567,6 @@
       restartAutoScroll();
     });
 
-    // Pagination dots
     dots.forEach((dot) => {
       dot.addEventListener("click", (e) => {
         e.stopPropagation();
@@ -632,11 +576,9 @@
       });
     });
 
-    // Hover to pause auto-scroll on desktop
     gallery.addEventListener("mouseenter", stopAutoScroll);
     gallery.addEventListener("mouseleave", startAutoScroll);
 
-    // Touch Swipe Support for mobile devices
     let touchStartX = 0;
     let touchStartY = 0;
     let touchEndX = 0;
@@ -676,7 +618,6 @@
       }, 80);
     }, { passive: true });
 
-    // Double tap/click to open full image lightbox modal
     slides.forEach((slide) => {
       slide.addEventListener("dblclick", () => {
         const img = slide.querySelector("img");
@@ -687,7 +628,6 @@
       });
     });
 
-    // IntersectionObserver to auto-scroll only when Section 2 is visible
     const section2 = $("#section2");
     if ("IntersectionObserver" in window && section2) {
       const observer = new IntersectionObserver(
@@ -707,7 +647,6 @@
       startAutoScroll();
     }
 
-    // Pause when tab is hidden, resume when visible
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) {
         stopAutoScroll();
@@ -717,9 +656,7 @@
     });
   }
 
-  // ==========================================
-  // 12. DESKTOP VIEW CONTROLS
-  // ==========================================
+
   $("#toggleFullscreenBtn")?.addEventListener("click", () => {
     const appViewport = $("#appViewport");
     appViewport.classList.toggle("fullscreen-mode");
@@ -736,9 +673,7 @@
     }
   });
 
-  // ==========================================
-  // 13. INITIALIZATION
-  // ==========================================
+
   window.addEventListener("DOMContentLoaded", () => {
     initCoupleData();
     initCoupleSlider();
