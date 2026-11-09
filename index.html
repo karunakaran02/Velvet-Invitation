@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="ta">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>தயாளன் &amp; மர்யம் — திருமண வரவேற்பு அழைப்பிதழ் | Thayalan &amp; Maryam</title>
+    <meta name="description" content="இரு இதயங்கள், இரு வழிபாடுகள், ஒன்றான அன்பில் இணைகின்றன. தயாளன் மற்றும் மர்யம் திருமண வரவேற்பு அழைப்பிதழ் - 28 நவம்பர் 2026." />
+
+    <!-- Open Graph for WhatsApp, iMessage, Social Sharing -->
+    <meta property="og:title" content="தயாளன் &amp; மர்யம் — திருமண வரவேற்பு அழைப்பிதழ்" />
+    <meta property="og:description" content="சனிக்கிழமை, 28 நவம்பர் 2026 | காஜா மஹால், அபிஷேகப்பட்டி, திருநெல்வேலி" />
+    <meta property="og:image" content="./assets/images/page1-invitation.jpg" />
+    <meta property="og:type" content="website" />
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+
+    <!-- QR Code Generator & Config -->
+    <script src="./assets/js/config.js"></script>
+    <script src="./assets/js/qrcode.min.js"></script>
+    <script src="./assets/js/app.js" defer></script>
+  </head>
+  <body>
+    <!-- Desktop Stage Wrapper -->
+    <div class="desktop-stage">
+      <div class="ambient-glow ambient-glow-1"></div>
+      <div class="ambient-glow ambient-glow-2"></div>
+
+      <!-- Desktop Top Control Bar -->
+      <div class="desktop-controls">
+        <button id="toggleFullscreenBtn" class="control-pill-btn" type="button">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+          </svg>
+          <span id="fullscreenBtnLabel">Fullscreen</span>
+        </button>
+      </div>
+
+      <!-- Desktop Floating "Scan on Mobile" QR Card -->
+      <aside class="desktop-qr-card" id="desktopQrCard" aria-label="Mobile View QR Code">
+        <button class="qr-card-close" id="desktopQrClose" type="button" aria-label="Close QR Code">&times;</button>
+        <div class="qr-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+            <line x1="12" y1="18" x2="12.01" y2="18"></line>
+          </svg>
+          <span>Mobile View</span>
+        </div>
+        <div class="desktop-qr-frame" id="desktopQrCodeFrame">
+          <!-- Dynamically populated by QRCode.js -->
+        </div>
+        <div class="desktop-qr-text">
+          <strong>Scan with Phone</strong>
+          <span>Experience native mobile invite</span>
+        </div>
+      </aside>
+
+      <!-- Main Phone Screen Container -->
+      <main class="app-viewport" id="appViewport">
+        <!-- Background Audio (Autoplay & Inline for Native Webview/Browsers) -->
+        <audio
+          id="bgAudio"
+          src="./assets/audio/AUDIO-2026-11-09-09-28-26.mp3"
+          loop
+          preload="auto"
+          autoplay
+          playsinline
+        >
+          <source src="./assets/audio/AUDIO-2026-11-09-09-28-26.mp3" type="audio/mpeg" />
+        </audio>
+
+        <!-- Canvas for Gold Petals / Glow Particles -->
+        <canvas id="petalCanvas"></canvas>
+
+        <!-- =======================================================
+             CONTINUOUS VERTICAL SCROLL CONTAINER
+             ======================================================= -->
+        <div class="invitation-scroll-container" id="invitationScroll">
+
+          <!-- ================= HERO COVER SECTION ================= -->
+          <section id="hero" class="hero" aria-label="Wedding Invitation Opening">
+            <!-- Background Atmospheric Video & Poster -->
+            <video
+              id="introVideo"
+              class="hero-video"
+              loop
+              muted
+              playsinline
+              preload="auto"
+              poster="./assets/images/hero-background.webp"
+            >
+              <source src="./assets/media/intro-video.mp4" type="video/mp4" />
+            </video>
+
+            <!-- Dark Velvet Radial Veil -->
+            <div class="hero-veil"></div>
+
+            <!-- Double Champagne Arch Geometry -->
+            <div class="hero-geometry" aria-hidden="true">
+              <i></i>
+              <i></i>
+            </div>
+
+            <!-- Ornate Swaying Hanging Lanterns -->
+            <svg class="hero-lantern hero-lantern-left" viewBox="0 0 24 40" fill="none">
+              <line x1="12" y1="0" x2="12" y2="10" stroke="#d4af37" stroke-width="1.5"></line>
+              <circle cx="12" cy="13" r="3" fill="#f6e27a"></circle>
+              <path d="M6 16 L18 16 L15 28 L9 28 Z" fill="#d4af37" stroke="#aa771c"></path>
+              <ellipse cx="12" cy="22" rx="3.5" ry="4.5" fill="#fff" opacity="0.95"></ellipse>
+              <circle cx="12" cy="32" r="1.5" fill="#f6e27a"></circle>
+            </svg>
+
+            <svg class="hero-lantern hero-lantern-right" viewBox="0 0 24 40" fill="none">
+              <line x1="12" y1="0" x2="12" y2="10" stroke="#d4af37" stroke-width="1.5"></line>
+              <circle cx="12" cy="13" r="3" fill="#f6e27a"></circle>
+              <path d="M6 16 L18 16 L15 28 L9 28 Z" fill="#d4af37" stroke="#aa771c"></path>
+              <ellipse cx="12" cy="22" rx="3.5" ry="4.5" fill="#fff" opacity="0.95"></ellipse>
+              <circle cx="12" cy="32" r="1.5" fill="#f6e27a"></circle>
+            </svg>
+
+            <!-- Hero Content -->
+            <div class="hero-content">
+              <!-- Interfaith Sacred Symbols -->
+              <div class="hero-symbols-row" role="img" aria-label="Sacred Interfaith Harmony">
+                <div class="symbol-badge symbol-om" title="Sacred Om">
+                  <svg viewBox="0 0 512 512" class="symbol-icon" aria-hidden="true">
+                    <path fill="currentColor" d="M360.6 60.94a10.43 10.43 0 0 0 14.76 0l21.57-21.56a10.43 10.43 0 0 0 0-14.76L375.35 3.06c-4.08-4.07-10.68-4.07-14.76 0l-21.57 21.56a10.43 10.43 0 0 0 0 14.76l21.58 21.56zM412.11 192c-26.69 0-51.77 10.39-70.64 29.25l-24.25 24.25c-6.78 6.77-15.78 10.5-25.38 10.5H245c10.54-22.1 14.17-48.11 7.73-75.23-10.1-42.55-46.36-76.11-89.52-83.19-36.15-5.93-70.9 5.04-96.01 28.78-7.36 6.96-6.97 18.85 1.12 24.93l26.15 19.63c5.72 4.3 13.66 4.32 19.2-.21 8.45-6.9 19.02-10.71 30.27-10.71 26.47 0 48.01 21.53 48.01 48s-21.54 48-48.01 48h-31.9c-11.96 0-19.74 12.58-14.39 23.28l16.09 32.17c2.53 5.06 7.6 8.1 13.17 8.55h33.03c35.3 0 64.01 28.7 64.01 64s-28.71 64-64.01 64c-96.02 0-122.35-54.02-145.15-92.03-4.53-7.55-14.77-3.58-14.79 5.22C-.09 416 41.13 512 159.94 512c70.59 0 128.02-57.42 128.02-128 0-23.42-6.78-45.1-17.81-64h21.69c26.69 0 51.77-10.39 70.64-29.25l24.25-24.25c6.78-6.77 15.78-10.5 25.38-10.5 19.78 0 35.88 16.09 35.88 35.88V392c0 13.23-18.77 24-32.01 24-39.4 0-66.67-24.24-81.82-42.89-4.77-5.87-14.2-2.54-14.2 5.02V416s0 64 96.02 64c48.54 0 96.02-39.47 96.02-88V291.88c0-55.08-44.8-99.88-99.89-99.88zm42.18-124.73c-85.55 65.12-169.05 2.75-172.58.05-6.02-4.62-14.44-4.38-20.14.55-5.74 4.92-7.27 13.17-3.66 19.8 1.61 2.95 40.37 72.34 118.8 72.34 79.92 0 98.78-31.36 101.75-37.66 1.02-2.12 1.53-4.47 1.53-6.83V80c0-13.22-15.14-20.69-25.7-12.73z" />
+                  </svg>
+                </div>
+
+                <div class="symbol-union">
+                  <span class="symbol-line"></span>
+                  <span class="symbol-sparkle">✦</span>
+                  <span class="symbol-line"></span>
+                </div>
+
+                <div class="symbol-badge symbol-crescent" title="Sacred Crescent &amp; Star">
+                  <svg viewBox="0 0 512 512" class="symbol-icon" aria-hidden="true">
+                    <path fill="currentColor" d="M340.47 466.36c-1.45 0-6.89.46-9.18.46-116.25 0-210.82-94.57-210.82-210.82S215.04 45.18 331.29 45.18c2.32 0 7.7.46 9.18.46 7.13 0 13.33-5.03 14.75-12.07 1.46-7.25-2.55-14.49-9.47-17.09C316.58 5.54 286.39 0 256 0 114.84 0 0 114.84 0 256s114.84 256 256 256c30.39 0 60.58-5.54 89.7-16.49 6.92-2.6 10.93-9.84 9.47-17.09-1.42-7.04-7.62-12.07-14.7-12.06zM494.67 259.9c-2.48-6.93-9.43-11.45-16.9-11.45h-76.84l-23.71-70.62c-2.4-7.14-9.14-11.83-16.73-11.83s-14.33 4.69-16.73 11.83l-23.71 70.62h-76.84c-7.47 0-14.42 4.52-16.9 11.45-2.48 6.93-.76 14.71 4.5 19.82l62.13 50.45-23.71 72.82c-2.31 7.1 0.43 15.01 6.64 19.33 6.21 4.32 14.45 4.09 20.42-.56l62.13-46.01 62.13 46.01c5.97 4.65 14.21 4.88 20.42.56 6.21-4.32 8.95-12.23 6.64-19.33l-23.71-72.82 62.13-50.45c5.26-5.11 6.98-12.89 4.5-19.82z"/>
+                  </svg>
+                </div>
+              </div>
+
+              <p class="hero-quote-tamil">
+                பிரார்த்தனைகள் வேறாக இருந்தாலும் பதில் தந்தது ஒரே இறைவன்
+              </p>
+
+              <div class="hero-divider"><span>✦</span></div>
+
+              <p class="hero-welcome">We request the honour of your presence at the Wedding Reception of</p>
+
+              <!-- Couple Names in Large Gold Typography & Calligraphy -->
+              <div class="couple-names font-style-calligraphy tamil-style-arima">
+                <div>
+                  <h1 class="groom-name">தயாளன்</h1>
+                  <span class="name-sub">Thayalan</span>
+                </div>
+
+                <span class="name-ampersand">&amp;</span>
+
+                <div>
+                  <h1 class="bride-name">மர்யம்</h1>
+                  <span class="name-sub">Maryam</span>
+                </div>
+              </div>
+
+              <p class="hero-occasion">திருமண வரவேற்பு அழைப்பிதழ்</p>
+
+              <p class="hero-date-badge">
+                சனிக்கிழமை, 28 நவம்பர் 2026 - காஜா மஹால், திருநெல்வேலி
+              </p>
+
+              <!-- Royal Monogram Seal -->
+              <div class="royal-seal-trigger" id="openSealBtn" role="button" tabindex="0" aria-label="Royal Monogram">
+                <div class="royal-seal-disk">
+                  <span class="royal-seal-monogram">Dhaya&nbsp;Maryam</span>
+                </div>
+                <span class="royal-seal-label">ROYAL CELEBRATION</span>
+              </div>
+
+              <!-- Wedsmint Signature Vertical Line Scroll Cue -->
+              <a class="scroll-cue" href="#section1">
+                <span>Scroll</span>
+                <i aria-hidden="true"></i>
+              </a>
+            </div>
+          </section>
+
+          <!-- Floral Divider 1 -->
+          <div class="floral-divider-wrap" aria-hidden="true">
+            <img src="./assets/images/floral-divider.webp" alt="Floral Divider" />
+          </div>
+
+          <!-- ================= SECTION 2: OUR STORY (WEDSMINT VELVET TEMPLATE) ================= -->
+          <section class="invitation-section section-ivory-card" id="section2" aria-label="Section 2: Our Story">
+            <div class="page2-shell">
+              <span class="story-eyebrow">OUR STORY</span>
+              <h2 class="story-title">Moments, softly held</h2>
+
+              <!-- Subtle Gold Diamond Divider -->
+              <div class="story-divider" aria-hidden="true">
+                <span class="story-divider-line"></span>
+                <span class="story-divider-diamond">◇</span>
+                <span class="story-divider-line"></span>
+              </div>
+
+              <!-- Clean Photo Card (Wedsmint Template: No Frame, Delicate Corner Brackets) -->
+              <div class="couple-photo-card" id="couplePhotoGallery">
+                <span class="photo-corner photo-corner-tl" aria-hidden="true"></span>
+                <span class="photo-corner photo-corner-br" aria-hidden="true"></span>
+
+                <div class="couple-photo-inner">
+                  <div class="couple-slider-track" id="coupleSliderTrack">
+                    <!-- Photo 1 -->
+                    <div class="couple-slide is-active" data-index="0">
+                      <img
+                        id="couplePhoto1"
+                        src="./assets/images/1.jpeg"
+                        alt="தயாளன் &amp; மர்யம் - Photo 1"
+                        title="Click to next photo"
+                        loading="eager"
+                        onerror="if(!this.dataset.retried){this.dataset.retried='1'; if(this.src.endsWith('.jpeg')) this.src=this.src.replace(/\.jpeg$/, '.jpg');}"
+                      />
+                    </div>
+                    <!-- Photo 2 -->
+                    <div class="couple-slide" data-index="1">
+                      <img
+                        id="couplePhoto2"
+                        src="./assets/images/2.jpeg"
+                        alt="தயாளன் &amp; மர்யம் - Photo 2"
+                        title="Click to next photo"
+                        loading="lazy"
+                        onerror="if(!this.dataset.retried){this.dataset.retried='1'; if(this.src.endsWith('.jpeg')) this.src=this.src.replace(/\.jpeg$/, '.jpg');}"
+                      />
+                    </div>
+                  </div>
+
+                  <!-- Navigation Arrows -->
+                  <button type="button" class="slider-arrow slider-arrow-prev" id="coupleSliderPrev" aria-label="Previous photo">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                  </button>
+                  <button type="button" class="slider-arrow slider-arrow-next" id="coupleSliderNext" aria-label="Next photo">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Minimal Template Dots (● ○) -->
+              <div class="story-slider-dots" id="coupleSliderDots">
+                <button type="button" class="story-dot is-active" data-index="0" aria-label="Photo 1"></button>
+                <button type="button" class="story-dot" data-index="1" aria-label="Photo 2"></button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Floral Divider 2 (Overlap transition into next section) -->
+          <div class="floral-divider-wrap" aria-hidden="true" style="margin-top: -16px; position: relative; z-index: 10;">
+            <img src="./assets/images/floral-divider.webp" alt="Floral Divider" />
+          </div>
+
+          <!-- ================= SECTION 3: VENUE & QR CODE ================= -->
+          <section class="invitation-section" id="section3" aria-label="Section 3: Venue and Location">
+            <div class="page3-shell">
+              <span class="section-eyebrow">VENUE &amp; DIRECTIONS</span>
+
+              <div class="venue-card">
+                <h3 class="venue-title-tamil">காஜா மஹால்</h3>
+                <p class="venue-title-eng">KAJA MAHAL</p>
+
+                <!-- Dynamic QR Code Container -->
+                <div class="qr-code-box" id="venueQrCode" title="Scan to open in Google Maps">
+                  <!-- Generated by QRCode.js -->
+                </div>
+
+                <div class="qr-scan-badge">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                    <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                  </svg>
+                  <span>Scan for Direct Google Maps Navigation</span>
+                </div>
+
+                <!-- Venue Address Details -->
+                <div class="venue-address-box">
+                  <p class="venue-addr-tamil">📍 அபிஷேகப்பட்டி, திருநெல்வேலி</p>
+                  <p class="venue-addr-eng">Abishekapatti, Tirunelveli, Tamil Nadu</p>
+                </div>
+
+                <!-- Notice that address will be refined -->
+                <div class="venue-notice-pill">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                  </svg>
+                  <span>துல்லியமான முகவரி &amp; லேண்ட்மார்க் விரைவில் பகிரப்படும்</span>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="venue-actions-row">
+                  <a
+                    id="openMapLink"
+                    class="venue-btn-primary"
+                    href="https://www.google.com/maps/place/KAJA+MAHAL/@8.7670625,77.6360625,17z/data=!3m1!4b1!4m6!3m5!1s0x3b0417002ce260d7:0x154143ec7da6b6d2!8m2!3d8.7670625!4d77.6360625!16s%2Fg%2F11n9sjwqbq?entry=ttu&g_ep=EgoyMDI2MTEwMy4wIKXMDSoASAFQAw%3D%3D"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
+                      <line x1="8" y1="2" x2="8" y2="18"></line>
+                      <line x1="16" y1="6" x2="16" y2="22"></line>
+                    </svg>
+                    <span>வரைபடத்தில் திற (Open in Google Maps)</span>
+                  </a>
+
+                  <button id="copyAddressBtn" class="venue-btn-secondary" type="button">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    <span>முகவரியை நகலெடு (Copy Address)</span>
+                  </button>
+                
+                </div>
+              </div>
+
+              <!-- Smooth Scroll Cue -->
+              <a class="scroll-cue" href="#section4" style="margin-top: 30px;">
+                <span>Scroll</span>
+                <i aria-hidden="true"></i>
+              </a>
+            </div>
+          </section>
+
+          <!-- Floral Divider 4 -->
+          <div class="floral-divider-wrap" aria-hidden="true">
+            <img src="./assets/images/floral-divider.webp" alt="Floral Divider" />
+          </div>
+
+          <!-- ================= SECTION 4: COUNTDOWN & RSVP ================= -->
+          <section class="invitation-section" id="section4" aria-label="Section 4: Countdown and RSVP">
+            <div class="page4-shell">
+              <span class="section-eyebrow">COUNTING DOWN TO FOREVER</span>
+              <h2 class="section-tamil-title">நிகழ்வு நாள் &amp; வாழ்த்து</h2>
+
+              <!-- Live Countdown Clock -->
+              <div class="countdown-container">
+                <p class="countdown-label">28 நவம்பர் 2026 • இன்னும் எஞ்சிய நாட்கள்</p>
+                <div class="countdown-grid">
+                  <div class="countdown-box">
+                    <span class="countdown-number" id="countDays">00</span>
+                    <span class="countdown-unit">நாட்கள் (Days)</span>
+                  </div>
+                  <div class="countdown-box">
+                    <span class="countdown-number" id="countHours">00</span>
+                    <span class="countdown-unit">மணி (Hours)</span>
+                  </div>
+                  <div class="countdown-box">
+                    <span class="countdown-number" id="countMinutes">00</span>
+                    <span class="countdown-unit">நிமிடம் (Min)</span>
+                  </div>
+                  <div class="countdown-box">
+                    <span class="countdown-number" id="countSeconds">00</span>
+                    <span class="countdown-unit">விநாடி (Sec)</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Blessings Note -->
+              <div class="blessings-card">
+                <p class="blessings-quote-tamil">
+                  உங்கள் அன்பும் ஆசீர்வாதமும்<br />
+                  எங்கள் இருவரின் வாழ்வைப் பசுமையாக்கட்டும்.
+                </p>
+
+                <div class="floral-divider-wrap" style="padding: 10px 0;">
+                  <img src="./assets/images/floral-divider.webp" alt="" />
+                </div>
+
+                <p class="blessings-signature">
+                தயா மெட்டல் ஒர்க்ஸ் <br />
+                  <span style="font-size: 13px; opacity: 0.8;">தங்கள் நல்வரவை நாடும் குடும்பத்தினர்</span>
+                </p>
+              </div>
+
+              <!-- WhatsApp RSVP Button -->
+              <div class="rsvp-card">
+                <span style="font-size: 13.5px; color: var(--ivory); font-weight: 500;">
+                  மணமக்களுக்கு நல்வாழ்த்துக்களை உடனே அனுப்புங்கள்
+                </span>
+
+                <a id="whatsappRsvpBtn" class="whatsapp-rsvp-btn" href="#">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                  </svg>
+                  <span>வாழ்த்து அனுப்ப (Send Wishes)</span>
+                </a>
+              </div>
+            </div>
+          </section>
+
+        </div>
+
+        <!-- Toast Feedback Message -->
+        <div class="app-toast" id="appToast" role="alert">
+          <span id="toastMsg">Notification</span>
+        </div>
+
+        <!-- Lightbox Modal for Full Card Zoom -->
+        <div class="lightbox-modal" id="lightboxModal">
+          <div class="lightbox-content">
+            <button class="lightbox-close-btn" id="lightboxClose" type="button" aria-label="Close Preview">&times;</button>
+            <img class="lightbox-img" id="lightboxImg" src="" alt="Full view" />
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </body>
+</html>
